@@ -208,9 +208,9 @@ footer img{height:40px;width:auto}
   1) Troque o número de WhatsApp: procure por 5581900000000
   2) Troque o e-mail: procure por contato@netgauge.com.br
   3) Prints reais dos dashboards: crie a pasta /img ao lado
-     deste arquivo com os nomes case-olt.png, case-core.png,
-     case-gpon.png, case-bng.png, case-alertas.png,
-     case-churn.png e case-financeiro.png.
+     deste arquivo com os nomes case-olt, case-core,
+     case-gpon, case-bng, case-alertas,
+     case-churn, case-financeiro e case-atendimentos (formato .webp).
      Enquanto a imagem não existir, aparece uma ilustração.
   ========================================================
 -->
@@ -371,6 +371,7 @@ footer img{height:40px;width:auto}
         <div class="tabgroup">Gestão</div>
         <button class="tab" role="tab" data-case="churn">Churn</button>
         <button class="tab" role="tab" data-case="financeiro">Financeiro</button>
+        <button class="tab" role="tab" data-case="atendimentos">Atendimentos</button>
       </div>
       <div class="casepanel" role="tabpanel" id="casepanel" aria-live="polite"></div>
     </div>
@@ -480,6 +481,13 @@ const illus = {
     box(0,0,200,130)+label(16,26,'Contratos ativos')+big(16,72,'19.036')+label(16,102,'+312 ativações no mês') +
     box(0,146,200,134)+label(16,172,'Inadimplência')+big(16,218,'6,4%',C.amber)+label(16,248,'atualizado agora') +
     box(216,0,424,280)+label(232,26,'Ativações e contratos ativos por mês')+bars(232,50,392,120,[.5,.55,.52,.62,.6,.68,.7,.66,.74,.78,.8,.85],C.blue)+area(232,190,392,70,[.2,.25,.3,.28,.36,.42,.45,.5,.55,.6,.66,.72],C.green)
+  ),
+  atendimentos: () => svgWrap(
+    box(0,0,150,90)+label(16,26,'Total de OS')+big(16,68,'54') +
+    box(163,0,150,90)+label(179,26,'Finalizadas')+big(179,68,'26',C.green) +
+    box(326,0,150,90)+label(342,26,'Em aberto')+big(342,68,'12',C.amber) +
+    box(490,0,150,90)+label(506,26,'SLA')+big(506,68,'96%',C.green) +
+    box(0,106,640,174)+label(16,132,'OS por assunto')+hbars(16,142,608,[['Instalação',.85,C.blue],['Recolhimento',.35,C.blue],['Sinal alto',.2,C.amber],['Sem acesso',.16,C.red]],C.blue)
   )
 };
 
@@ -490,9 +498,10 @@ const cases = {
   bng:{t:'Concentrador BNG: assinantes e autenticação', p:[['Assinantes','Clientes online, conexões e desconexões.'],['RADIUS e pools','Autenticações, rejeições e uso dos pools de IP.'],['Uplinks e portas','Ocupação, sinal SFP e top clientes.']]},
   alertas:{t:'Alertas da rede direto no WhatsApp', p:[['Praticidade','Acompanhe a saúde da rede de qualquer lugar.'],['Sem limite de usuários','Toda a equipe pode receber os alertas.'],['Personalizável','Cada alerta é configurado conforme a sua necessidade.']]},
   churn:{t:'Análise de churn', p:[['Cancelamentos','Acompanhamento mensal e anual dos números de cancelamento.'],['Análise por bairro','Onde os cancelamentos se concentram.'],['Motivos de cancelamento','Os principais motivos, em detalhe.']]},
-  financeiro:{t:'Acompanhamento financeiro', p:[['Contratos ativos','Evolução mensal da base e das ativações.'],['Inadimplência','Acompanhamento em tempo real.'],['Visão mensal','Receita e base lado a lado para a diretoria.']]}
+  financeiro:{t:'Acompanhamento financeiro', p:[['Base de contratos','Ativos, pré-contratos, bloqueados e cancelados.'],['Ativações x cancelamentos','Evolução ano a ano da base.'],['Risco de cancelamento','Health score por cliente, combinando rede, suporte e financeiro.']]},
+  atendimentos:{t:'Acompanhamento técnico de atendimentos', p:[['Ordens de serviço','Total, finalizadas, em aberto e reincidência.'],['Tempo e SLA','Tempo até agendamento, execução e cumprimento de SLA.'],['Por técnico e assunto','Tempo médio de cada técnico e os assuntos mais frequentes.']]}
 };
-const imgName = {olt:'case-olt',core:'case-core',gpon:'case-gpon',bng:'case-bng',alertas:'case-alertas',churn:'case-churn',financeiro:'case-financeiro'};
+const imgName = {olt:'case-olt',core:'case-core',gpon:'case-gpon',bng:'case-bng',alertas:'case-alertas',churn:'case-churn',financeiro:'case-financeiro',atendimentos:'case-atendimentos'};
 
 const panel = document.getElementById('casepanel');
 const tabs = [...document.querySelectorAll('.tab')];
