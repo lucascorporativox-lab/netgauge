@@ -67,27 +67,7 @@ nav.menu a:hover{color:#fff}
 .screen{background:#0A1B40;border:1px solid var(--cardline);border-radius:16px;padding:20px;color:#C9D6E4;box-shadow:0 0 80px -20px rgba(15,109,198,.55)}
 .screen-head{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-bottom:14px}
 .screen-head b{color:#fff;font-weight:700}
-.live{display:inline-flex;align-items:center;gap:6px;color:#8FE3BC}
-.live i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(52,194,138,.7);animation:pulse 2s infinite}
-@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(52,194,138,0)}100%{box-shadow:0 0 0 0 rgba(52,194,138,0)}}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
-.kpi{background:#11274F;border-radius:10px;padding:12px 14px}
-.kpi small{display:block;font-size:12px;color:#8DA2BA}
-.kpi strong{white-space:nowrap;font-size:22px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
-.kpi em{font-style:normal;font-size:12px;display:block}
-.kpi .up{color:#8FE3BC}.kpi .warn{color:var(--warn)}
-.chart{background:#11274F;border-radius:10px;padding:12px 14px}
-.chart small{font-size:12px;color:#8DA2BA;display:flex;justify-content:space-between}
-.chart svg{width:100%;height:150px;margin-top:6px}
-.draw{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.4s .3s ease-out forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-.olts{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-top:12px}
-.olts span{height:26px;border-radius:5px;background:#1A3663}
-.olts span.on{background:rgba(52,194,138,.22);box-shadow:inset 0 0 0 1px rgba(143,227,188,.5)}
-.olts span.al{background:rgba(245,193,90,.22);box-shadow:inset 0 0 0 1px rgba(245,193,90,.7)}
-.legend{display:flex;gap:16px;font-size:12px;color:#8DA2BA;margin-top:8px}
-.legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;vertical-align:middle}
-@media (max-width:520px){.kpi{padding:10px}.kpi strong{font-size:17px}.kpi small{font-size:11px}}
+.screen-shot{display:block;width:100%;height:auto;border-radius:8px}
 
 /* sections */
 section{padding:96px 0}
@@ -242,26 +222,9 @@ footer img{height:40px;width:auto}
       </div>
     </div>
 
-    <div class="screen" role="img" aria-label="Exemplo de painel de NOC com assinantes online, tráfego do dia e status das OLTs">
-      <div class="screen-head"><b>Painel do NOC</b><span class="live"><i></i>ao vivo</span></div>
-      <div class="kpis">
-        <div class="kpi"><small>PPPoE online</small><strong>18.412</strong> <em class="up">▲ 0,4%</em></div>
-        <div class="kpi"><small>Pico de tráfego</small><strong>42,7 G</strong> <em class="up">71% do link</em></div>
-        <div class="kpi"><small>Alarmes</small><strong>2</strong> <em class="warn">OLT 06</em></div>
-      </div>
-      <div class="chart">
-        <small><span>Tráfego de entrada, últimas 24h</span><span>Gbps</span></small>
-        <svg viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true">
-          <g stroke="#2A3D55" stroke-width="1"><line x1="0" y1="37" x2="600" y2="37"/><line x1="0" y1="75" x2="600" y2="75"/><line x1="0" y1="112" x2="600" y2="112"/></g>
-          <path d="M0 118 C40 122 70 128 100 126 S160 118 190 104 S250 86 290 80 S350 76 380 70 S430 50 470 34 S530 22 560 40 S590 70 600 76 L600 150 L0 150Z" fill="rgba(31,95,214,.22)"/>
-          <path class="draw" d="M0 118 C40 122 70 128 100 126 S160 118 190 104 S250 86 290 80 S350 76 380 70 S430 50 470 34 S530 22 560 40 S590 70 600 76" fill="none" stroke="#6FA0FF" stroke-width="2.5"/>
-          <path class="draw" d="M0 134 C50 136 90 138 120 137 S180 132 220 124 S290 114 330 112 S400 106 440 96 S510 84 550 92 S590 104 600 108" fill="none" stroke="#8FE3BC" stroke-width="2"/>
-        </svg>
-      </div>
-      <div class="olts" aria-hidden="true">
-        <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="al"></span><span class="on"></span><span class="on"></span>
-      </div>
-      <div class="legend"><span><i style="background:#8FE3BC"></i>OLT online</span><span><i style="background:#F5C15A"></i>Com alarme</span></div>
+    <div class="screen">
+      <div class="screen-head"><b>Núcleo de rede</b><span>painel em operação</span></div>
+      <img class="screen-shot" src="img/case-core.webp" width="1600" height="705" alt="Painel real de núcleo de rede: PPPoE online, peers BGP, tráfego por link (trânsito, CDN, CGNAT e BNG) e status das sessões BGP">
     </div>
   </div>
 </section>
