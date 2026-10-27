@@ -175,6 +175,11 @@ h3{font-size:18px;font-weight:700;line-height:1.3}
 .zoomable{cursor:zoom-in}
 .zoomable:focus-visible{outline:2px solid var(--sky);outline-offset:4px}
 .hint{margin-top:10px;font-size:13px;color:var(--muted)}
+.shot-foot{margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap}
+.shot-foot .hint{margin-top:0}
+.demo-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--sky);text-decoration:none;padding:9px 14px;border:1px solid rgba(77,182,242,.45);border-radius:10px;background:rgba(77,182,242,.08);transition:background .2s,border-color .2s}
+.demo-link:hover{background:rgba(77,182,242,.16);border-color:var(--sky)}
+.demo-link small{font-weight:500;color:var(--muted)}
 #zoom{border:0;padding:0;margin:auto;width:96vw;max-width:1640px;max-height:94vh;background:#061029;border-radius:12px;overflow:auto;cursor:zoom-out}
 #zoom::backdrop{background:rgba(3,8,20,.88)}
 #zoom img{display:block;width:100%;height:auto}
@@ -226,16 +231,14 @@ h3{font-size:18px;font-weight:700;line-height:1.3}
 .wa-float svg{width:28px;height:28px;fill:#fff}
 
 /* cta */
-.cta{background:linear-gradient(135deg,#0F6DC6,#0A4F97);color:#fff;padding:96px 0;position:relative;overflow:hidden}
-.cta::before{content:"";position:absolute;right:-90px;top:50%;width:460px;height:470px;transform:translateY(-50%);background:url(img/simbolo.png) center/contain no-repeat;opacity:.1;pointer-events:none}
-.cta .wrap{position:relative;display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:end}
-.cta p{color:#D6E6F7;margin-top:16px;max-width:46ch;font-size:17px}
+.cta{padding:8px 0 96px}
+.cta-box{position:relative;overflow:hidden;display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:end;padding:56px;border:1px solid var(--cardline);border-radius:18px;background:linear-gradient(135deg,rgba(15,109,198,.28),rgba(15,109,198,.06))}
+.cta-box::before{content:"";position:absolute;right:-90px;top:50%;width:420px;height:430px;transform:translateY(-50%);background:url(img/simbolo.png) center/contain no-repeat;opacity:.07;pointer-events:none}
+.cta-box>*{position:relative}
+.cta p{color:var(--muted);margin-top:16px;max-width:46ch;font-size:17px}
 .cta .actions{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
-.cta .btn{background:#fff;color:var(--ink);font-size:16px;padding:15px 26px}
-.cta .btn:hover{background:var(--light)}
-.cta .btn.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px #fff}
-.cta .btn.ghost:hover{background:rgba(255,255,255,.12)}
-@media (max-width:860px){.cta .wrap{grid-template-columns:1fr}}
+.cta .btn{font-size:16px;padding:15px 26px}
+@media (max-width:860px){.cta-box{grid-template-columns:1fr;gap:28px;padding:32px 24px}}
 
 footer{background:#040B1E;color:#8DA2BA;font-size:13.5px}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:28px;padding-bottom:28px}
@@ -542,6 +545,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
 <!-- CONTATO -->
 <section class="cta" id="contato">
   <div class="wrap">
+   <div class="cta-box">
     <div>
       <h2>Vamos conversar sobre a rede e os dados do seu provedor?</h2>
       <p>Conte como está a sua operação hoje. Na demonstração, mostramos o que faz sentido para o seu provedor: monitoramento, análise de dados ou uma solução para uma necessidade específica.</p>
@@ -550,6 +554,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
       <a class="btn" href="https://wa.me/5581987942112?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20NetGauge%20e%20quero%20conhecer%20as%20solu%C3%A7%C3%B5es." target="_blank" rel="noopener">Conversar no WhatsApp</a>
       <a class="btn ghost" href="mailto:netgaugue@gmail.com">netgaugue@gmail.com</a>
     </div>
+   </div>
   </div>
 </section>
 
@@ -668,6 +673,9 @@ const cases = {
   redes:{a:'Gestão técnica', d:'Sem números, não dá para ver onde o atendimento técnico atrasa nem o que gera reincidência.', t:'Gestão à Vista - Redes', r:'Gargalos do atendimento técnico ficam claros: tempo até o agendamento, reincidência, SLA e desempenho de cada técnico e equipe.', p:[['Ordens de serviço','Total, finalizadas, em aberto, reincidência e diagnóstico dos reparos.'],['Tempo e SLA','Tempo até agendamento, execução, reagendamentos e cumprimento de SLA.'],['Equipes e técnicos','Qualidade da instalação, ranking de técnicos e mapa de calor por bairro.']]},
   estoque:{a:'Almoxarifado e gestão técnica', d:'O material acaba no meio da semana, ou fica parado no almoxarifado, porque ninguém vê o saldo e o consumo de cada técnico.', t:'Controle de estoque', r:'A reposição é feita antes de o item zerar, e o consumo de material de cada técnico fica visível, ligado às OS finalizadas.', p:[['Níveis de reposição','Itens abaixo do mínimo, acabando, zerados e acima do máximo.'],['Entradas e saídas','Valor em estoque, notas de compra e saídas por mês.'],['Consumo por técnico','Quem mais consome cada produto e os itens com mais saída.']]}
 };
+/* demonstrações ao vivo (dados fictícios): DataHub abre direto na tela do case */
+const DATAHUB = 'https://datahub-demox.vercel.app/';
+const demos = {mapa:['https://mapa-demo-theta.vercel.app/','login já preenchido'],visao:[DATAHUB+'#visao-geral'],financeiro:[DATAHUB+'#financeiro'],churn:[DATAHUB+'#visao-geral'],redes:[DATAHUB+'#redes'],estoque:[DATAHUB+'#estoque']};
 const shots = {olt:['case-olt',1600,592],core:['case-core',1600,705],gpon:['case-gpon',1600,583],alertas:['case-alertas',530,525],mapa:['case-mapa',2000,1125],churn:['case-churn',2000,1106],financeiro:['case-financeiro',2000,850],visao:['case-visao',2000,1308],redes:['case-redes',2000,1150],estoque:['case-estoque',2000,1189]};
 
 const panel = document.getElementById('casepanel');
@@ -676,7 +684,7 @@ const tabs = [...document.querySelectorAll('.tab')];
 
 /* sem print em /img: mostra a ilustração e tira a dica de zoom */
 function fallback(img, key){
-  const hint = img.closest('.shot').nextElementSibling;
+  const hint = img.closest('.shot').nextElementSibling.querySelector('.hint');
   if(hint && hint.classList.contains('hint')) hint.remove();
   const div = Object.assign(document.createElement('div'),{innerHTML:illus[key](),style:'width:100%'});
   div.firstChild.setAttribute('aria-label','Ilustração: '+cases[key].t);
@@ -690,7 +698,7 @@ function show(key, focus){
   panel.innerHTML = `<span class="for">Para ${c.a}</span><h3>${c.t}</h3>
     <div class="ba"><div><b>O problema</b>${c.d}</div><div><b>O que muda</b>${c.r}</div></div>
     <div class="shot"><img class="zoomable" tabindex="0" src="img/${file}.webp" width="${w}" height="${h}" alt="Exemplo: ${c.t}" onerror="fallback(this,'${key}')"></div>
-    <p class="hint">Clique na imagem para ampliar.</p>
+    <div class="shot-foot"><p class="hint">Clique na imagem para ampliar.</p>${demos[key] ? `<a class="demo-link" href="${demos[key][0]}" target="_blank" rel="noopener">Abrir demonstração ao vivo ↗${demos[key][1] ? ` <small>· ${demos[key][1]}</small>` : ''}</a>` : ''}</div>
     <div class="points">${c.p.map(x=>`<div><b>${x[0]}</b><p>${x[1]}</p></div>`).join('')}</div>
     <div class="case-cta"><p><strong>Quer isso com os dados do seu provedor?</strong>Mostramos na demonstração e, com o acesso liberado, entregamos um primeiro painel em 3 dias.</p><a class="btn" href="${waLink('Olá, vim pelo site da NetGauge e quero ver o exemplo "'+c.t+'" funcionando no meu provedor.')}" target="_blank" rel="noopener">Quero isso no meu provedor</a></div>`;
 }
@@ -731,7 +739,7 @@ const head = document.querySelector('header.top');
 addEventListener('scroll',()=>head.classList.toggle('scrolled',scrollY>10),{passive:true});
 
 /* elementos surgem ao entrar na tela */
-const revealSel = 'section:not(.hero) .eyebrow, section:not(.hero) h2, section:not(.hero) .intro, .problems>div, .product, .others-title, .other, .flow, .logos>span, .also, .step, .diff, .person, .faq details, .cta .wrap>*, .tabs, .offer-cta';
+const revealSel = 'section:not(.hero) .eyebrow, section:not(.hero) h2, section:not(.hero) .intro, .problems>div, .product, .others-title, .other, .flow, .logos>span, .also, .step, .diff, .person, .faq details, .cta-box>*, .tabs, .offer-cta';
 if('IntersectionObserver' in window){
   const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll(revealSel).forEach(el=>{
