@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NetGauge Consulting · Monitoramento de rede e análise de dados para provedores</title>
-<meta name="description" content="Monitoramento de rede e análise de dados para provedores de internet. Também fazemos mapeamento de redes integrado ao Zabbix, automações e soluções sob medida.">
+<title>NetGauge Consulting · Rede e dados para provedores de internet</title>
+<meta name="description" content="Monitoramento de rede, mapeamento de redes e análise de dados para provedores de internet. Também fazemos automações e soluções sob medida.">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="canonical" href="https://netgauge-beta.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="NetGauge Consulting">
-<meta property="og:title" content="NetGauge Consulting · Monitoramento de rede e análise de dados para provedores">
-<meta property="og:description" content="Monitoramento de rede e análise de dados para provedores de internet. Também fazemos mapeamento de redes integrado ao Zabbix, automações e soluções sob medida.">
+<meta property="og:title" content="NetGauge Consulting · Rede e dados para provedores de internet">
+<meta property="og:description" content="Monitoramento de rede, mapeamento de redes e análise de dados para provedores de internet. Também fazemos automações e soluções sob medida.">
 <meta property="og:url" content="https://netgauge-beta.vercel.app/">
 <meta property="og:image" content="https://netgauge-beta.vercel.app/img/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -130,7 +130,7 @@ h3{font-size:18px;font-weight:700;line-height:1.3}
 .product li{padding:11px 0;border-top:1px solid var(--cardline);display:flex;gap:12px;align-items:baseline;color:#DCE6F4}
 .product li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--sky);flex:none;transform:translateY(-2px)}
 .others-title{margin-top:56px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.others{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.others{margin-top:16px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .other{background:var(--card);border:1px solid var(--cardline);border-radius:12px;padding:26px}
 .other p{color:var(--muted);margin-top:8px;font-size:15.5px}
 @media (max-width:900px){.products,.others{grid-template-columns:1fr}}
@@ -370,7 +370,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
   <div class="wrap">
     <span class="eyebrow">Soluções</span>
     <h2>Rede e dados do provedor sob controle</h2>
-    <p class="intro">Nossos dois produtos principais cobrem a operação da rede e a gestão do negócio. Ao redor deles, oferecemos soluções para necessidades específicas do provedor.</p>
+    <p class="intro">Nossos três produtos principais cobrem a operação e o mapeamento da rede e a gestão do negócio. Ao redor deles, oferecemos soluções para necessidades específicas do provedor.</p>
     <div class="products">
       <div class="product">
         <span class="tag">Produto principal</span>
@@ -384,10 +384,15 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
         <p>ERP, planilhas e sistemas integrados em painéis para diretoria, financeiro e comercial.</p>
         <ul><li>MRR, faturamento e inadimplência</li><li>Cancelamentos e churn</li><li>Vendas, ativações e base por plano</li><li>Atendimento técnico e SLA</li></ul>
       </div>
+      <div class="product">
+        <span class="tag">Produto principal</span>
+        <h3>Mapeamento de redes</h3>
+        <p>A rede óptica no mapa, com o impacto de cada rompimento antes de a equipe sair.</p>
+        <ul><li>POPs, CEOs, CTOs, cabos e clientes no mapa</li><li>Simulação de rompimentos e clientes afetados</li><li>Diagrama de fusão de cada caixa</li><li>Rastreio de sinal da OLT até o cliente</li></ul>
+      </div>
     </div>
     <p class="others-title">Outras soluções</p>
     <div class="others">
-      <div class="other"><h3>Mapeamento de redes</h3><p>Mapas da sua rede integrados ao Zabbix, para ver onde está cada equipamento e link e como estão operando.</p></div>
       <div class="other"><h3>Automações para o provedor</h3><p>Tarefas repetitivas automatizadas, como alertas no WhatsApp que já chegam com o diagnóstico da queda.</p></div>
       <div class="other"><h3>Soluções sob medida</h3><p>Desenvolvemos a ferramenta a partir da dor do seu provedor, quando nenhuma solução pronta resolve.</p></div>
     </div>
@@ -466,8 +471,8 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
         <button class="tab" role="tab" aria-controls="casepanel" data-case="churn">Churn</button>
         <button class="tab" role="tab" aria-controls="casepanel" data-case="redes">Gestão à Vista - Redes</button>
         <button class="tab" role="tab" aria-controls="casepanel" data-case="estoque">Estoque</button>
-        <div class="tabgroup" role="presentation">Outras soluções</div>
-        <button class="tab" role="tab" aria-controls="casepanel" data-case="mapa">Mapeamento de rede</button>
+        <div class="tabgroup" role="presentation">Mapeamento de redes</div>
+        <button class="tab" role="tab" aria-controls="casepanel" data-case="mapa">Mapa e simulador de rompimento</button>
       </div>
       <div class="casepanel" role="tabpanel" id="casepanel" aria-live="polite"></div>
     </div>
@@ -551,7 +556,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
 <footer>
   <div class="wrap">
     <img src="img/logo.png" alt="NetGauge Consulting" width="111" height="40">
-    <span>© <span id="ano"></span> NetGauge Consulting · Monitoramento de rede e análise de dados para provedores</span>
+    <span>© <span id="ano"></span> NetGauge Consulting · Rede e dados para provedores de internet</span>
   </div>
 </footer>
 
