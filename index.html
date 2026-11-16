@@ -121,7 +121,7 @@ h3{font-size:18px;font-weight:700;line-height:1.3}
 }
 
 /* solutions */
-.products{margin-top:48px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.products{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .product{background:var(--card);border:1px solid var(--cardline);border-top:3px solid var(--sky);border-radius:12px;padding:30px 30px 14px;display:flex;flex-direction:column}
 .product .demo-link{margin:auto 0 16px;align-self:flex-start}
 .product .tag{align-self:flex-start;display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--sky);border-radius:999px;padding:3px 10px;margin-bottom:14px}
@@ -130,6 +130,14 @@ h3{font-size:18px;font-weight:700;line-height:1.3}
 .product ul{list-style:none;margin:14px 0 18px}
 .product li{padding:11px 0;border-top:1px solid var(--cardline);display:flex;gap:12px;align-items:baseline;color:#DCE6F4}
 .product li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--sky);flex:none;transform:translateY(-2px)}
+/* produto em destaque (IA) */
+.product.featured{grid-column:1/-1;display:grid;grid-template-columns:1.1fr 1fr;gap:8px 56px;align-items:center;padding:38px 38px 24px;border-color:rgba(77,182,242,.55);border-top-width:3px;background:linear-gradient(135deg,rgba(15,109,198,.38),rgba(22,48,100,.22));box-shadow:0 0 80px -28px rgba(77,182,242,.75)}
+.featured .feat-main{display:flex;flex-direction:column}
+.featured .tag{background:linear-gradient(90deg,var(--sky),#8FE3BC)}
+.featured h3{font-size:clamp(28px,3.2vw,38px)}
+.featured .feat-main>p{color:#C9D8EC;margin-top:10px;max-width:46ch;font-size:17px}
+.product.featured .demo-link{margin:22px 0 14px}
+@media (max-width:900px){.product.featured{grid-template-columns:1fr;padding:28px 26px 16px}}
 .others-title{margin-top:56px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .others{margin-top:16px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .other{background:var(--card);border:1px solid var(--cardline);border-radius:12px;padding:26px}
@@ -418,35 +426,34 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
   <div class="wrap">
     <span class="eyebrow">Soluções</span>
     <h2>Rede e dados do provedor sob controle</h2>
-    <p class="intro">Nossos quatro produtos principais cobrem a operação e o mapeamento da rede, a gestão do negócio e a análise dos dados com IA. Ao redor deles, oferecemos soluções para necessidades específicas do provedor.</p>
+    <p class="intro">Nossa novidade é a integração com IA, que analisa os dados do provedor por você. Ela se soma ao monitoramento, à análise de dados e ao mapeamento da rede. Ao redor deles, atendemos necessidades específicas do provedor.</p>
     <div class="products">
+      <div class="product featured">
+        <div class="feat-main">
+          <span class="tag">Novo</span>
+          <h3>Integração com IA</h3>
+          <p>A IA lê os dados do ERP e da rede para responder perguntas, resumir o período e avisar o que foge do padrão.</p>
+          <a class="demo-link" href="https://wa.me/5581987942112?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20NetGauge%20e%20quero%20ver%20uma%20demonstra%C3%A7%C3%A3o%20da%20integra%C3%A7%C3%A3o%20com%20IA." target="_blank" rel="noopener">Pedir demonstração ↗</a>
+        </div>
+        <ul><li>Perguntas em português sobre os dados do provedor</li><li>Resumos automáticos no WhatsApp ou e-mail</li><li>Alertas de anomalias em cancelamentos, vendas e chamados</li><li>Conectada ao ERP, à rede e às planilhas</li></ul>
+      </div>
       <div class="product">
-        <span class="tag">Produto principal</span>
         <h3>Monitoramento de rede</h3>
         <p>O NOC enxerga a rede inteira em tempo real, do núcleo até a ONU do cliente.</p>
         <ul><li>Tráfego e ocupação de links e OLTs</li><li>Sessões BGP, BNG e concentradores</li><li>Sinal óptico das ONUs</li><li>Latência, perda de pacotes e alarmes</li></ul>
         <a class="demo-link" href="https://wa.me/5581987942112?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20NetGauge%20e%20quero%20ver%20uma%20demonstra%C3%A7%C3%A3o%20do%20monitoramento%20de%20rede." target="_blank" rel="noopener">Pedir demonstração ↗</a>
       </div>
       <div class="product">
-        <span class="tag">Produto principal</span>
         <h3>Análise de dados</h3>
         <p>ERP, planilhas e sistemas integrados em painéis para diretoria, financeiro e comercial.</p>
         <ul><li>MRR, faturamento e inadimplência</li><li>Cancelamentos e churn</li><li>Vendas, ativações e base por plano</li><li>Atendimento técnico e SLA</li></ul>
         <a class="demo-link" href="https://datahub-demox.vercel.app/" target="_blank" rel="noopener">Abrir demonstração ao vivo ↗</a>
       </div>
       <div class="product">
-        <span class="tag">Produto principal</span>
         <h3>Mapeamento de redes</h3>
         <p>A rede óptica no mapa, com o impacto de cada rompimento antes de a equipe sair.</p>
         <ul><li>POPs, CEOs, CTOs, cabos e clientes no mapa</li><li>Simulação de rompimentos e clientes afetados</li><li>Diagrama de fusão de cada caixa</li><li>Rastreio de sinal da OLT até o cliente</li></ul>
         <a class="demo-link" href="https://mapa-demo-theta.vercel.app/" target="_blank" rel="noopener">Abrir demonstração ao vivo ↗</a>
-      </div>
-      <div class="product">
-        <span class="tag">Novo · Produto principal</span>
-        <h3>Integração com IA</h3>
-        <p>A IA lê os dados do ERP e da rede para responder perguntas, resumir o período e avisar o que foge do padrão.</p>
-        <ul><li>Perguntas em português sobre os dados do provedor</li><li>Resumos automáticos no WhatsApp ou e-mail</li><li>Alertas de anomalias em cancelamentos, vendas e chamados</li><li>Conectada ao ERP, à rede e às planilhas</li></ul>
-        <a class="demo-link" href="https://wa.me/5581987942112?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20NetGauge%20e%20quero%20ver%20uma%20demonstra%C3%A7%C3%A3o%20da%20integra%C3%A7%C3%A3o%20com%20IA." target="_blank" rel="noopener">Pedir demonstração ↗</a>
       </div>
     </div>
     <p class="others-title">Outras soluções</p>
