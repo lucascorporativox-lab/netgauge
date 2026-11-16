@@ -227,7 +227,17 @@ h3{font-size:18px;font-weight:700;line-height:1.3}
 .faq details p{color:var(--muted);padding-bottom:18px;margin-top:-4px}
 
 /* diagnóstico */
-.diag{margin-top:40px;background:var(--card);border:1px solid var(--cardline);border-radius:16px;padding:36px;display:grid;gap:30px}
+.diag-modal{margin:auto;padding:0;width:min(780px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain;color:var(--text);background:var(--bg);border:1px solid var(--cardline);border-radius:16px;box-shadow:0 30px 80px -20px rgba(0,0,0,.7),0 0 80px -30px rgba(15,109,198,.6)}
+.diag-modal::backdrop{background:rgba(3,8,20,.82);backdrop-filter:blur(4px)}
+.diag-modal[open]{animation:fadeUp .3s both}
+body:has(.diag-modal[open]){overflow:hidden}
+.diag-head{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:28px 32px 20px;background:linear-gradient(var(--bg) 85%,rgba(6,16,41,0))}
+.diag-head .eyebrow{margin-bottom:8px}
+.diag-head h2{font-size:clamp(22px,3vw,28px)}
+.diag-head p{color:var(--muted);font-size:15px;margin-top:8px;max-width:56ch}
+.diag-close{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--cardline);background:#0A1B40;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+.diag-close:hover{border-color:var(--sky)}
+.diag{padding:8px 32px 32px;display:grid;gap:28px}
 .diag fieldset{border:0;min-width:0}
 .diag legend{font-weight:700;font-size:16.5px;margin-bottom:4px}
 .diag legend .n{font-family:var(--mono);color:var(--sky);font-size:13px;margin-right:8px}
@@ -252,7 +262,12 @@ h3{font-size:18px;font-weight:700;line-height:1.3}
 .diag-err:empty{display:none}
 fieldset.bad legend{color:var(--alarm)}
 .fields input.bad{border-color:var(--alarm)}
-@media (max-width:700px){.diag{padding:24px 18px}.fields{grid-template-columns:1fr}}
+@media (max-width:700px){
+  .diag-modal{width:100vw;max-width:100vw;max-height:100dvh;height:100dvh;border-radius:0;border:0}
+  .diag-head{padding:20px 16px 14px}
+  .diag{padding:4px 16px 24px}
+  .fields{grid-template-columns:1fr}
+}
 
 /* whatsapp */
 .wa-float{position:fixed;right:20px;bottom:20px;z-index:30;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.35)}
@@ -354,7 +369,6 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
       <a href="#solucao">Como funciona</a>
       <a href="#cases">Exemplos</a>
       <a href="#quem-somos">Quem somos</a>
-      <a href="#diagnostico">Diagnóstico</a>
       <a href="#duvidas">Dúvidas</a>
     </nav>
     <a class="btn" href="#diagnostico">Fale conosco</a>
@@ -557,12 +571,16 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
   </div>
 </section>
 
-<!-- DIAGNÓSTICO -->
-<section id="diagnostico">
-  <div class="wrap">
-    <span class="eyebrow">Diagnóstico</span>
-    <h2>Conte o que o seu provedor precisa</h2>
-    <p class="intro">Leva cerca de 1 minuto. Com essas respostas, chegamos na conversa já sabendo o que mostrar para o seu caso.</p>
+<!-- DIAGNÓSTICO (modal) -->
+<dialog id="diagnostico" class="diag-modal" aria-labelledby="diag-title">
+    <div class="diag-head">
+      <div>
+        <span class="eyebrow">Diagnóstico</span>
+        <h2 id="diag-title">Conte o que o seu provedor precisa</h2>
+        <p>Leva cerca de 1 minuto. Com essas respostas, chegamos na conversa já sabendo o que mostrar para o seu caso.</p>
+      </div>
+      <button type="button" class="diag-close" aria-label="Fechar">×</button>
+    </div>
     <form class="diag" id="diag" novalidate>
       <fieldset data-req="interesse">
         <legend><span class="n">01</span>O que fez você chegar até a NetGauge? <span class="req">*</span></legend>
@@ -635,8 +653,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
         <button class="btn" type="submit">Enviar pelo WhatsApp</button>
       </div>
     </form>
-  </div>
-</section>
+</dialog>
 
 <!-- DÚVIDAS -->
 <section id="duvidas">
@@ -846,8 +863,20 @@ zoom.addEventListener('click', ()=>zoom.close());
 
 /* formulário de diagnóstico: monta a mensagem e abre o WhatsApp */
 (()=>{
+  const modal = document.getElementById('diagnostico');
   const form = document.getElementById('diag');
   const err = document.getElementById('diag-err');
+
+  /* abrir e fechar o modal */
+  const abrir = () => { if(modal.open) return; modal.showModal ? modal.showModal() : modal.setAttribute('open',''); };
+  const fechar = () => { modal.close ? modal.close() : modal.removeAttribute('open'); };
+  document.addEventListener('click', e=>{
+    const a = e.target.closest('a[href="#diagnostico"]');
+    if(a){ e.preventDefault(); abrir(); }
+  });
+  modal.querySelector('.diag-close').addEventListener('click', fechar);
+  modal.addEventListener('click', e=>{ if(e.target===modal) fechar(); }); /* clique fora do conteúdo */
+  if(location.hash==='#diagnostico') abrir();
   const params = new URLSearchParams(location.search);
   /* origem técnica do acesso (UTM ou site de onde veio), enviada junto com as respostas */
   const utm = ['utm_source','utm_medium','utm_campaign'].map(k=>params.get(k)).filter(Boolean).join(' / ');
@@ -902,7 +931,7 @@ zoom.addEventListener('click', ()=>zoom.close());
 
     const url = waLink(linhas.join('\n'));
     const win = window.open(url, '_blank');
-    if(win) win.opener = null; else location.href = url;
+    if(win){ win.opener = null; fechar(); } else location.href = url;
   });
 })();
 
@@ -915,7 +944,7 @@ const head = document.querySelector('header.top');
 addEventListener('scroll',()=>head.classList.toggle('scrolled',scrollY>10),{passive:true});
 
 /* elementos surgem ao entrar na tela */
-const revealSel = 'section:not(.hero) .eyebrow, section:not(.hero) h2, section:not(.hero) .intro, .problems>div, .product, .others-title, .other, .flow, .logos>span, .also, .step, .diff, .person, .faq details, .cta-box>*, .tabs, .offer-cta, .diag';
+const revealSel = 'section:not(.hero) .eyebrow, section:not(.hero) h2, section:not(.hero) .intro, .problems>div, .product, .others-title, .other, .flow, .logos>span, .also, .step, .diff, .person, .faq details, .cta-box>*, .tabs, .offer-cta';
 if('IntersectionObserver' in window){
   const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll(revealSel).forEach(el=>{
