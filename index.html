@@ -226,6 +226,34 @@ h3{font-size:18px;font-weight:700;line-height:1.3}
 .faq details[open] summary::after{content:"−"}
 .faq details p{color:var(--muted);padding-bottom:18px;margin-top:-4px}
 
+/* diagnóstico */
+.diag{margin-top:40px;background:var(--card);border:1px solid var(--cardline);border-radius:16px;padding:36px;display:grid;gap:30px}
+.diag fieldset{border:0;min-width:0}
+.diag legend{font-weight:700;font-size:16.5px;margin-bottom:4px}
+.diag legend .n{font-family:var(--mono);color:var(--sky);font-size:13px;margin-right:8px}
+.diag .help{color:var(--muted);font-size:14px;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips span{display:inline-block;padding:9px 15px;border:1px solid var(--cardline);border-radius:999px;font-size:14.5px;font-weight:600;color:#DCE6F4;background:rgba(6,16,41,.45);transition:background .2s,border-color .2s,color .2s}
+.chips label:hover span{border-color:rgba(77,182,242,.6)}
+.chips input:checked+span{background:var(--brand);border-color:var(--sky);color:#fff}
+.chips input:focus-visible+span{outline:3px solid var(--sky);outline-offset:2px}
+.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.fields label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600}
+.fields .full{grid-column:1/-1}
+.fields input,.fields textarea{font:inherit;font-size:15.5px;font-weight:500;color:#fff;background:rgba(6,16,41,.6);border:1px solid var(--cardline);border-radius:10px;padding:12px 14px;width:100%}
+.fields textarea{min-height:96px;resize:vertical}
+.fields input:focus,.fields textarea:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 3px rgba(77,182,242,.2)}
+.req{color:var(--sky)}
+.diag-foot{display:flex;align-items:center;justify-content:space-between;gap:14px 24px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--cardline)}
+.diag-foot p{color:var(--muted);font-size:14px;max-width:52ch}
+.diag-err{color:var(--alarm);font-weight:600;font-size:14.5px}
+.diag-err:empty{display:none}
+fieldset.bad legend{color:var(--alarm)}
+.fields input.bad{border-color:var(--alarm)}
+@media (max-width:700px){.diag{padding:24px 18px}.fields{grid-template-columns:1fr}}
+
 /* whatsapp */
 .wa-float{position:fixed;right:20px;bottom:20px;z-index:30;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.35)}
 .wa-float:hover{background:#1EBE5A}
@@ -326,6 +354,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
       <a href="#solucao">Como funciona</a>
       <a href="#cases">Exemplos</a>
       <a href="#quem-somos">Quem somos</a>
+      <a href="#diagnostico">Diagnóstico</a>
       <a href="#duvidas">Dúvidas</a>
     </nav>
     <a class="btn" href="https://wa.me/5581987942112?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20NetGauge%20e%20quero%20falar%20com%20a%20equipe." target="_blank" rel="noopener">Fale conosco</a>
@@ -525,6 +554,87 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
       <div class="step"><div class="n">03</div><h3>Condição de lançamento</h3><p>Os primeiros provedores têm acesso a pacotes promocionais, em troca de feedback e, se gostarem, de um depoimento.</p></div>
     </div>
     <div class="offer-cta"><a class="btn" href="https://wa.me/5581987942112?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20NetGauge%20e%20quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar uma demonstração</a></div>
+  </div>
+</section>
+
+<!-- DIAGNÓSTICO -->
+<section id="diagnostico">
+  <div class="wrap">
+    <span class="eyebrow">Diagnóstico</span>
+    <h2>Conte o que o seu provedor precisa</h2>
+    <p class="intro">Leva cerca de 1 minuto. Com essas respostas, chegamos na conversa já sabendo o que mostrar para o seu caso.</p>
+    <form class="diag" id="diag" novalidate>
+      <fieldset data-req="interesse">
+        <legend><span class="n">01</span>O que fez você chegar até a NetGauge? <span class="req">*</span></legend>
+        <p class="help">Marque tudo o que interessa.</p>
+        <div class="chips">
+          <label><input type="checkbox" name="interesse" value="Monitoramento de rede"><span>Monitoramento de rede</span></label>
+          <label><input type="checkbox" name="interesse" value="Mapeamento de redes"><span>Mapeamento de redes</span></label>
+          <label><input type="checkbox" name="interesse" value="Análise de dados"><span>Análise de dados</span></label>
+          <label><input type="checkbox" name="interesse" value="Automações (ex.: alertas no WhatsApp)"><span>Automações (ex.: alertas no WhatsApp)</span></label>
+          <label><input type="checkbox" name="interesse" value="Solução sob medida"><span>Solução sob medida</span></label>
+          <label><input type="checkbox" name="interesse" value="Ainda não sei, quero entender"><span>Ainda não sei, quero entender</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="n">02</span>Quais desses problemas acontecem hoje?</legend>
+        <p class="help">Marque os que mais pesam na operação.</p>
+        <div class="chips">
+          <label><input type="checkbox" name="dor" value="Descobrimos quedas pelo cliente"><span>Descobrimos quedas pelo cliente</span></label>
+          <label><input type="checkbox" name="dor" value="Alertas chegam sem diagnóstico da causa"><span>Alertas chegam sem diagnóstico da causa</span></label>
+          <label><input type="checkbox" name="dor" value="Não sabemos quantos clientes um rompimento afeta"><span>Não sabemos quantos clientes um rompimento afeta</span></label>
+          <label><input type="checkbox" name="dor" value="Documentação da rede óptica desatualizada ou em planilha"><span>Rede óptica sem documentação atualizada</span></label>
+          <label><input type="checkbox" name="dor" value="Sem visão de sinal óptico e ocupação das OLTs"><span>Sem visão de sinal e ocupação das OLTs</span></label>
+          <label><input type="checkbox" name="dor" value="Relatórios montados à mão"><span>Relatórios montados à mão</span></label>
+          <label><input type="checkbox" name="dor" value="Churn e cancelamentos sem acompanhamento"><span>Churn sem acompanhamento</span></label>
+          <label><input type="checkbox" name="dor" value="Inadimplência e faturamento sem visibilidade"><span>Inadimplência e faturamento sem visibilidade</span></label>
+          <label><input type="checkbox" name="dor" value="Dados espalhados entre sistemas"><span>Dados espalhados entre sistemas</span></label>
+        </div>
+      </fieldset>
+
+
+      <fieldset>
+        <legend><span class="n">03</span>Qual ERP vocês usam?</legend>
+        <div class="chips">
+          <label><input type="radio" name="erp" value="IXC Soft"><span>IXC Soft</span></label>
+          <label><input type="radio" name="erp" value="SGP"><span>SGP</span></label>
+          <label><input type="radio" name="erp" value="MK-Auth"><span>MK-Auth</span></label>
+          <label><input type="radio" name="erp" value="Voalle"><span>Voalle</span></label>
+          <label><input type="radio" name="erp" value="Hubsoft"><span>Hubsoft</span></label>
+          <label><input type="radio" name="erp" value="Outro"><span>Outro</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="n">04</span>Como a rede é monitorada hoje?</legend>
+        <div class="chips">
+          <label><input type="radio" name="monit" value="Zabbix"><span>Zabbix</span></label>
+          <label><input type="radio" name="monit" value="Zabbix com Grafana"><span>Zabbix com Grafana</span></label>
+          <label><input type="radio" name="monit" value="Outra ferramenta"><span>Outra ferramenta</span></label>
+          <label><input type="radio" name="monit" value="Nada estruturado"><span>Nada estruturado</span></label>
+        </div>
+      </fieldset>
+
+
+
+
+      <fieldset>
+        <legend><span class="n">05</span>Seus dados</legend>
+        <div class="fields">
+          <label>Nome <span class="req">*</span><input name="nome" autocomplete="name" required></label>
+          <label>Provedor <span class="req">*</span><input name="provedor" autocomplete="organization" required></label>
+          <label class="full">Cidade / UF<input name="cidade" autocomplete="address-level2"></label>
+          <label class="full">Quer contar mais alguma coisa?<textarea name="obs" placeholder="Ex.: queremos acompanhar o sinal das ONUs e saber o impacto de cada rompimento."></textarea></label>
+        </div>
+      </fieldset>
+
+      <div class="diag-foot">
+        <p>Ao enviar, abrimos o WhatsApp com as suas respostas já escritas. É só confirmar o envio.</p>
+        <p class="diag-err" id="diag-err" role="alert"></p>
+        <button class="btn" type="submit">Enviar pelo WhatsApp</button>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -734,6 +844,68 @@ document.addEventListener('keydown', e=>{
 });
 zoom.addEventListener('click', ()=>zoom.close());
 
+/* formulário de diagnóstico: monta a mensagem e abre o WhatsApp */
+(()=>{
+  const form = document.getElementById('diag');
+  const err = document.getElementById('diag-err');
+  const params = new URLSearchParams(location.search);
+  /* origem técnica do acesso (UTM ou site de onde veio), enviada junto com as respostas */
+  const utm = ['utm_source','utm_medium','utm_campaign'].map(k=>params.get(k)).filter(Boolean).join(' / ');
+  let ref = '';
+  try{ if(document.referrer && new URL(document.referrer).host!==location.host) ref = new URL(document.referrer).host; }catch(e){}
+  const acesso = utm || ref;
+
+  const pick = name => [...form.querySelectorAll(`[name="${name}"]:checked`)].map(i=>i.value);
+  const val = name => form.elements[name].value.trim();
+
+  form.addEventListener('change', e=>{
+    const fs = e.target.closest('fieldset.bad');
+    if(fs && fs.querySelector('input:checked')) fs.classList.remove('bad');
+  });
+  form.addEventListener('input', e=>{ if(e.target.value.trim()) e.target.classList.remove('bad'); });
+
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    const faltando = [];
+    form.querySelectorAll('fieldset[data-req]').forEach(fs=>{
+      const ok = !!fs.querySelector('input:checked');
+      fs.classList.toggle('bad', !ok);
+      if(!ok) faltando.push(fs);
+    });
+    ['nome','provedor'].forEach(n=>{
+      const el = form.elements[n], ok = !!el.value.trim();
+      el.classList.toggle('bad', !ok);
+      if(!ok) faltando.push(el);
+    });
+    if(faltando.length){
+      err.textContent = 'Preencha os campos marcados com * para continuar.';
+      const first = faltando[0];
+      (first.matches('fieldset') ? first.querySelector('input') : first).focus();
+      first.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'center'});
+      return;
+    }
+    err.textContent = '';
+
+    const linhas = [
+      'Olá, vim pelo site da NetGauge e preenchi o diagnóstico.',
+      '',
+      `*Nome:* ${val('nome')}`,
+      `*Provedor:* ${val('provedor')}${val('cidade') ? ' ('+val('cidade')+')' : ''}`,
+      `*Interesse:* ${pick('interesse').join(', ')}`
+    ];
+    const add = (rotulo, v) => { if(v && v.length) linhas.push(`*${rotulo}:* ${Array.isArray(v) ? v.join(', ') : v}`); };
+    add('Problemas hoje', pick('dor'));
+    add('ERP', pick('erp'));
+    add('Monitoramento', pick('monit'));
+    add('Observações', val('obs'));
+    add('Acesso via', acesso);
+
+    const url = waLink(linhas.join('\n'));
+    const win = window.open(url, '_blank');
+    if(win) win.opener = null; else location.href = url;
+  });
+})();
+
 /* ===== movimento ===== */
 document.documentElement.classList.add('js');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -743,7 +915,7 @@ const head = document.querySelector('header.top');
 addEventListener('scroll',()=>head.classList.toggle('scrolled',scrollY>10),{passive:true});
 
 /* elementos surgem ao entrar na tela */
-const revealSel = 'section:not(.hero) .eyebrow, section:not(.hero) h2, section:not(.hero) .intro, .problems>div, .product, .others-title, .other, .flow, .logos>span, .also, .step, .diff, .person, .faq details, .cta-box>*, .tabs, .offer-cta';
+const revealSel = 'section:not(.hero) .eyebrow, section:not(.hero) h2, section:not(.hero) .intro, .problems>div, .product, .others-title, .other, .flow, .logos>span, .also, .step, .diff, .person, .faq details, .cta-box>*, .tabs, .offer-cta, .diag';
 if('IntersectionObserver' in window){
   const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll(revealSel).forEach(el=>{
