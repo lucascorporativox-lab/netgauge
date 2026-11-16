@@ -258,6 +258,7 @@ body:has(.diag-modal[open]){overflow:hidden}
 .req{color:var(--sky)}
 .diag-foot{display:flex;align-items:center;justify-content:space-between;gap:14px 24px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--cardline)}
 .diag-foot p{color:var(--muted);font-size:14px;max-width:52ch}
+.lgpd{margin-top:12px;color:var(--muted);font-size:13px;line-height:1.5}
 .diag-err{color:var(--alarm);font-weight:600;font-size:14.5px}
 .diag-err:empty{display:none}
 fieldset.bad legend{color:var(--alarm)}
@@ -582,8 +583,19 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
       <button type="button" class="diag-close" aria-label="Fechar">×</button>
     </div>
     <form class="diag" id="diag" novalidate>
+      <fieldset>
+        <legend><span class="n">01</span>Seus dados</legend>
+        <div class="fields">
+          <label>Nome <span class="req">*</span><input name="nome" autocomplete="name" required></label>
+          <label>WhatsApp <span class="req">*</span><input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(81) 98765-4321" required></label>
+          <label>Provedor <span class="req">*</span><input name="provedor" autocomplete="organization" required></label>
+          <label>Cidade / UF<input name="cidade" autocomplete="address-level2"></label>
+        </div>
+        <p class="lgpd">Ao informar seu WhatsApp, a NetGauge pode entrar em contato sobre este diagnóstico, mesmo que você não conclua o envio. Seus dados não são compartilhados com terceiros.</p>
+      </fieldset>
+
       <fieldset data-req="interesse">
-        <legend><span class="n">01</span>O que fez você chegar até a NetGauge? <span class="req">*</span></legend>
+        <legend><span class="n">02</span>O que fez você chegar até a NetGauge? <span class="req">*</span></legend>
         <p class="help">Marque tudo o que interessa.</p>
         <div class="chips">
           <label><input type="checkbox" name="interesse" value="Monitoramento de rede"><span>Monitoramento de rede</span></label>
@@ -596,7 +608,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
       </fieldset>
 
       <fieldset>
-        <legend><span class="n">02</span>Quais desses problemas acontecem hoje?</legend>
+        <legend><span class="n">03</span>Quais desses problemas acontecem hoje?</legend>
         <p class="help">Marque os que mais pesam na operação.</p>
         <div class="chips">
           <label><input type="checkbox" name="dor" value="Descobrimos quedas pelo cliente"><span>Descobrimos quedas pelo cliente</span></label>
@@ -611,9 +623,8 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
         </div>
       </fieldset>
 
-
       <fieldset>
-        <legend><span class="n">03</span>Qual ERP vocês usam?</legend>
+        <legend><span class="n">04</span>Qual ERP vocês usam?</legend>
         <div class="chips">
           <label><input type="radio" name="erp" value="IXC Soft"><span>IXC Soft</span></label>
           <label><input type="radio" name="erp" value="SGP"><span>SGP</span></label>
@@ -625,7 +636,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
       </fieldset>
 
       <fieldset>
-        <legend><span class="n">04</span>Como a rede é monitorada hoje?</legend>
+        <legend><span class="n">05</span>Como a rede é monitorada hoje?</legend>
         <div class="chips">
           <label><input type="radio" name="monit" value="Zabbix"><span>Zabbix</span></label>
           <label><input type="radio" name="monit" value="Zabbix com Grafana"><span>Zabbix com Grafana</span></label>
@@ -634,16 +645,10 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
         </div>
       </fieldset>
 
-
-
-
       <fieldset>
-        <legend><span class="n">05</span>Seus dados</legend>
+        <legend><span class="n">06</span>Quer contar mais alguma coisa?</legend>
         <div class="fields">
-          <label>Nome <span class="req">*</span><input name="nome" autocomplete="name" required></label>
-          <label>Provedor <span class="req">*</span><input name="provedor" autocomplete="organization" required></label>
-          <label class="full">Cidade / UF<input name="cidade" autocomplete="address-level2"></label>
-          <label class="full">Quer contar mais alguma coisa?<textarea name="obs" placeholder="Ex.: queremos acompanhar o sinal das ONUs e saber o impacto de cada rompimento."></textarea></label>
+          <label class="full"><span class="sr">Observações</span><textarea name="obs" placeholder="Ex.: queremos acompanhar o sinal das ONUs e saber o impacto de cada rompimento."></textarea></label>
         </div>
       </fieldset>
 
@@ -861,7 +866,9 @@ document.addEventListener('keydown', e=>{
 });
 zoom.addEventListener('click', ()=>zoom.close());
 
-/* formulário de diagnóstico: monta a mensagem e abre o WhatsApp */
+/* formulário de diagnóstico: grava na planilha e abre o WhatsApp */
+/* URL do App da Web do Google Apps Script (ver integracoes/planilha-diagnostico.gs). Vazio = não grava. */
+const PLANILHA_URL = 'https://script.google.com/macros/s/AKfycbyv8HNRw7AkVLROim0IQLdGl2cMb6Oi0kb3elxZmCVXRpnGWgnDqaowZK_lcuIRbwKz/exec';
 (()=>{
   const modal = document.getElementById('diagnostico');
   const form = document.getElementById('diag');
@@ -876,9 +883,9 @@ zoom.addEventListener('click', ()=>zoom.close());
   });
   modal.querySelector('.diag-close').addEventListener('click', fechar);
   modal.addEventListener('click', e=>{ if(e.target===modal) fechar(); }); /* clique fora do conteúdo */
-  if(location.hash==='#diagnostico') abrir();
-  const params = new URLSearchParams(location.search);
+
   /* origem técnica do acesso (UTM ou site de onde veio), enviada junto com as respostas */
+  const params = new URLSearchParams(location.search);
   const utm = ['utm_source','utm_medium','utm_campaign'].map(k=>params.get(k)).filter(Boolean).join(' / ');
   let ref = '';
   try{ if(document.referrer && new URL(document.referrer).host!==location.host) ref = new URL(document.referrer).host; }catch(e){}
@@ -886,6 +893,38 @@ zoom.addEventListener('click', ()=>zoom.close());
 
   const pick = name => [...form.querySelectorAll(`[name="${name}"]:checked`)].map(i=>i.value);
   const val = name => form.elements[name].value.trim();
+  const digitos = () => val('whatsapp').replace(/\D/g,'');
+  const foneOk = () => digitos().length>=10 && digitos().length<=13;
+
+  /* ---- gravação na planilha: mesma linha (id) é atualizada até o envio final ---- */
+  const leadId = (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36)+Math.random().toString(36).slice(2));
+  let concluido = false, ultimo = '';
+  const dados = () => ({
+    id: leadId,
+    status: concluido ? 'concluído' : 'incompleto',
+    nome: val('nome'), whatsapp: val('whatsapp'), provedor: val('provedor'), cidade: val('cidade'),
+    interesse: pick('interesse').join(', '), problemas: pick('dor').join(', '),
+    erp: pick('erp').join(', '), monitoramento: pick('monit').join(', '),
+    observacoes: val('obs'), acesso_via: acesso, pagina: location.href.split('#')[0]
+  });
+  function gravar(){
+    if(!PLANILHA_URL || !foneOk()) return;   /* sem WhatsApp válido não há como retornar o contato */
+    const corpo = JSON.stringify(dados());
+    if(corpo===ultimo) return;               /* nada mudou desde o último envio */
+    ultimo = corpo;
+    try{
+      fetch(PLANILHA_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},body:corpo})
+        .catch(()=>{ ultimo=''; });
+    }catch(e){
+      ultimo = '';
+      if(navigator.sendBeacon) navigator.sendBeacon(PLANILHA_URL, new Blob([corpo],{type:'text/plain'}));
+    }
+  }
+  /* cadastro incompleto: grava ao fechar o modal, ao sair do campo de WhatsApp e ao sair da página */
+  modal.addEventListener('close', gravar);
+  form.elements.whatsapp.addEventListener('blur', gravar);
+  addEventListener('pagehide', gravar);
+  document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='hidden') gravar(); });
 
   form.addEventListener('change', e=>{
     const fs = e.target.closest('fieldset.bad');
@@ -896,24 +935,29 @@ zoom.addEventListener('click', ()=>zoom.close());
   form.addEventListener('submit', e=>{
     e.preventDefault();
     const faltando = [];
+    ['nome','whatsapp','provedor'].forEach(n=>{
+      const el = form.elements[n], ok = n==='whatsapp' ? foneOk() : !!el.value.trim();
+      el.classList.toggle('bad', !ok);
+      if(!ok) faltando.push(el);
+    });
     form.querySelectorAll('fieldset[data-req]').forEach(fs=>{
       const ok = !!fs.querySelector('input:checked');
       fs.classList.toggle('bad', !ok);
       if(!ok) faltando.push(fs);
     });
-    ['nome','provedor'].forEach(n=>{
-      const el = form.elements[n], ok = !!el.value.trim();
-      el.classList.toggle('bad', !ok);
-      if(!ok) faltando.push(el);
-    });
     if(faltando.length){
-      err.textContent = 'Preencha os campos marcados com * para continuar.';
+      err.textContent = foneOk() || !val('whatsapp')
+        ? 'Preencha os campos marcados com * para continuar.'
+        : 'Confira o WhatsApp: informe o número com DDD.';
       const first = faltando[0];
       (first.matches('fieldset') ? first.querySelector('input') : first).focus();
       first.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'center'});
       return;
     }
     err.textContent = '';
+
+    concluido = true;
+    gravar();
 
     const linhas = [
       'Olá, vim pelo site da NetGauge e preenchi o diagnóstico.',
