@@ -278,10 +278,6 @@ fieldset.bad legend{color:var(--alarm)}
   .fields{grid-template-columns:1fr}
 }
 
-/* whatsapp */
-.wa-float{position:fixed;right:20px;bottom:20px;z-index:30;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.35)}
-.wa-float:hover{background:#1EBE5A}
-.wa-float svg{width:28px;height:28px;fill:#fff}
 
 /* cta */
 .cta{padding:8px 0 96px}
@@ -352,6 +348,19 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
 @keyframes spinslow{to{transform:rotate(360deg)}}
 .out{transition:transform .25s,box-shadow .25s}
 .out:hover{transform:translateX(4px);box-shadow:-4px 0 0 var(--sky)}
+.out.ia{flex-direction:column;align-items:flex-start;justify-content:center;background:linear-gradient(90deg,var(--sky),#8FE3BC);line-height:1.25}
+.out.ia small{font-weight:600;font-size:12.5px;opacity:.75}
+
+/* ilustração do assistente de IA (aba de exemplos) */
+.ia-mock{width:100%;display:grid;grid-template-columns:1.3fr 1fr;gap:16px;text-align:left}
+.ia-col{display:flex;flex-direction:column;gap:10px;background:#0D1F48;border:1px solid var(--cardline);border-radius:12px;padding:16px}
+.ia-title{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--sky);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.msg{max-width:92%;padding:10px 14px;border-radius:12px;font-size:14.5px;line-height:1.5}
+.msg.me{align-self:flex-end;background:var(--brand);color:#fff;border-bottom-right-radius:4px}
+.msg.ai{align-self:flex-start;background:#173068;color:#DCE6F4;border-bottom-left-radius:4px}
+.msg.wa{align-self:flex-start;background:#0F3B2E;color:#DDF5EA;border-left:3px solid #25D366}
+.msg.wa.alert{background:#3A2A14;color:#FBE6C2;border-left-color:var(--warn)}
+@media (max-width:700px){.ia-mock{grid-template-columns:1fr}}
 
 /* abas de exemplos */
 .casepanel>*{animation:fadeUp .45s both}
@@ -364,8 +373,6 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
 .js .rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1),border-color .25s,box-shadow .25s}
 .js .rv.in{opacity:1;transform:none}
 
-.wa-float{animation:wa 2.6s infinite}
-@keyframes wa{0%{box-shadow:0 8px 24px rgba(0,0,0,.35),0 0 0 0 rgba(37,211,102,.55)}70%,100%{box-shadow:0 8px 24px rgba(0,0,0,.35),0 0 0 16px rgba(37,211,102,0)}}
 </style>
 </head>
 <body>
@@ -380,7 +387,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
       <a href="#quem-somos">Quem somos</a>
       <a href="#duvidas">Dúvidas</a>
     </nav>
-    <a class="btn" href="#diagnostico">Fale conosco</a>
+    <a class="btn" href="#diagnostico" data-origem="Topo: Fale conosco">Fale conosco</a>
   </div>
 </header>
 
@@ -391,10 +398,10 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap">
     <div>
-      <h1>Monitoramento, mapeamento e análise de dados <span class="grad">para provedores.</span></h1>
-      <p class="lead">Acompanhe a rede em tempo real, veja a rede óptica no mapa com o impacto de cada rompimento e transforme os dados do ERP em painéis claros para diretoria, NOC, financeiro e comercial.</p>
+      <h1>Monitoramento, mapeamento e análise de dados com IA <span class="grad">para provedores.</span></h1>
+      <p class="lead">Pergunte aos dados do provedor em português e receba resumos e alertas da IA no WhatsApp. Acompanhe a rede em tempo real, veja a rede óptica no mapa e tenha painéis claros para diretoria, NOC, financeiro e comercial.</p>
       <div class="actions">
-        <a class="btn" href="#diagnostico">Agendar uma demonstração</a>
+        <a class="btn" href="#diagnostico" data-origem="Abertura: Agendar demonstração">Agendar uma demonstração</a>
         <a class="btn ghost" href="#solucoes">Conhecer as soluções</a>
       </div>
     </div>
@@ -433,7 +440,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
           <span class="tag">Novo</span>
           <h3>Integração com IA</h3>
           <p>A IA lê os dados do ERP e da rede para responder perguntas, resumir o período e avisar o que foge do padrão.</p>
-          <a class="demo-link" href="https://wa.me/5581987942112?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20NetGauge%20e%20quero%20ver%20uma%20demonstra%C3%A7%C3%A3o%20da%20integra%C3%A7%C3%A3o%20com%20IA." target="_blank" rel="noopener">Pedir demonstração ↗</a>
+          <a class="demo-link" href="#diagnostico" data-interesse="Integração com IA" data-origem="Card: Integração com IA">Pedir demonstração →</a>
         </div>
         <ul><li>Perguntas em português sobre os dados do provedor</li><li>Resumos automáticos no WhatsApp ou e-mail</li><li>Alertas de anomalias em cancelamentos, vendas e chamados</li><li>Conectada ao ERP, à rede e às planilhas</li></ul>
       </div>
@@ -441,7 +448,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
         <h3>Monitoramento de rede</h3>
         <p>O NOC enxerga a rede inteira em tempo real, do núcleo até a ONU do cliente.</p>
         <ul><li>Tráfego e ocupação de links e OLTs</li><li>Sessões BGP, BNG e concentradores</li><li>Sinal óptico das ONUs</li><li>Latência, perda de pacotes e alarmes</li></ul>
-        <a class="demo-link" href="https://wa.me/5581987942112?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20NetGauge%20e%20quero%20ver%20uma%20demonstra%C3%A7%C3%A3o%20do%20monitoramento%20de%20rede." target="_blank" rel="noopener">Pedir demonstração ↗</a>
+        <a class="demo-link" href="#diagnostico" data-interesse="Monitoramento de rede" data-origem="Card: Monitoramento de rede">Pedir demonstração →</a>
       </div>
       <div class="product">
         <h3>Análise de dados</h3>
@@ -478,13 +485,14 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
         <div class="src"><b>Planilhas e CRM</b><span>Metas, vendas, controles</span></div>
       </div>
       <svg class="wire" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="4" y1="12.5" x2="96" y2="42"/><line x1="4" y1="37.5" x2="96" y2="47"/><line x1="4" y1="62.5" x2="96" y2="53"/><line x1="4" y1="87.5" x2="96" y2="58"/></svg>
-      <div class="hubcell"><div class="hub"><img class="sym" src="img/simbolo.png" alt=""><strong>NETGAUGE</strong><p>Integração, tratamento e modelagem dos dados</p></div></div>
-      <svg class="wire" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="4" y1="42" x2="96" y2="12.5"/><line x1="4" y1="47" x2="96" y2="37.5"/><line x1="4" y1="53" x2="96" y2="62.5"/><line x1="4" y1="58" x2="96" y2="87.5"/></svg>
+      <div class="hubcell"><div class="hub"><img class="sym" src="img/simbolo.png" alt=""><strong>NETGAUGE</strong><p>Integração, modelagem e análise dos dados com IA</p></div></div>
+      <svg class="wire" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="4" y1="40" x2="96" y2="10"/><line x1="4" y1="45" x2="96" y2="30"/><line x1="4" y1="50" x2="96" y2="50"/><line x1="4" y1="55" x2="96" y2="70"/><line x1="4" y1="60" x2="96" y2="90"/></svg>
       <div class="col">
         <div class="out">Painel da diretoria</div>
         <div class="out">Painel do NOC</div>
         <div class="out">Painel financeiro</div>
         <div class="out">Painel comercial</div>
+        <div class="out ia">Assistente de IA<small>perguntas, resumos e alertas</small></div>
       </div>
     </div>
   </div>
@@ -525,6 +533,8 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
     <p class="intro">Escolha um exemplo e veja o problema que ele resolve na operação do provedor. Todos são adaptados aos seus sistemas e indicadores. Os dados e identificações exibidos são ilustrativos.</p>
     <div class="cases">
       <div class="tabs" role="tablist" aria-label="Exemplos">
+        <div class="tabgroup" role="presentation">Integração com IA</div>
+        <button class="tab" role="tab" aria-controls="casepanel" data-case="ia">Assistente de IA</button>
         <div class="tabgroup" role="presentation">Monitoramento de rede</div>
         <button class="tab" role="tab" aria-controls="casepanel" data-case="olt">OLTs Huawei</button>
         <button class="tab" role="tab" aria-controls="casepanel" data-case="core">Núcleo de rede</button>
@@ -582,7 +592,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
       <div class="step"><div class="n">02</div><h3>Piloto com os seus dados</h3><p>Assim que o acesso aos dados é liberado, entregamos em 3 dias um primeiro painel com os dados do seu provedor, para você avaliar na prática.</p></div>
       <div class="step"><div class="n">03</div><h3>Condição de lançamento</h3><p>Os primeiros provedores têm acesso a pacotes promocionais, em troca de feedback e, se gostarem, de um depoimento.</p></div>
     </div>
-    <div class="offer-cta"><a class="btn" href="#diagnostico">Agendar uma demonstração</a></div>
+    <div class="offer-cta"><a class="btn" href="#diagnostico" data-origem="Para começar: Agendar demonstração">Agendar uma demonstração</a></div>
   </div>
 </section>
 
@@ -684,6 +694,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
       <details><summary>Funciona com o meu ERP?</summary><p>Trabalhamos com os ERPs mais usados por provedores, como IXC Soft, SGP, MK-Auth, Voalle e Hubsoft. Se o seu sistema permite acesso aos dados, por API ou banco de dados, avaliamos a integração na primeira conversa.</p></details>
       <details><summary>Preciso trocar algum sistema?</summary><p>Não. Conectamos aos sistemas que o provedor já usa: ERP, Zabbix, OLTs e planilhas.</p></details>
       <details><summary>Como fica a segurança do acesso aos meus sistemas?</summary><p>Usamos apenas acesso de leitura ao banco de dados ou à API dos seus sistemas, então nada é alterado do lado do provedor. Os dados de clientes são tratados conforme a LGPD.</p></details>
+      <details><summary>A IA tem acesso aos dados dos meus clientes?</summary><p>A IA trabalha sobre os mesmos dados dos painéis, lidos com acesso somente de leitura aos seus sistemas, então nada é alterado do lado do provedor. Os dados de clientes são tratados conforme a LGPD, e na demonstração mostramos quais informações a IA usa e onde elas ficam.</p></details>
       <details><summary>Vocês são uma equipe pequena. Como funciona o suporte?</summary><p>O suporte é direto com o desenvolvedor: você fala com quem construiu a solução, sem intermediários.</p></details>
       <details><summary>Tem fidelidade?</summary><p>Sim, o contrato tem fidelidade de 6 meses. Antes de fechar, você pode ver a demonstração e avaliar o primeiro painel com os seus dados.</p></details>
       <details><summary>Quanto custa?</summary><p>Depende das fontes de dados e dos painéis de que o provedor precisa. Na demonstração entendemos a sua operação e enviamos uma proposta.</p></details>
@@ -702,7 +713,7 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
       <p>Conte como está a sua operação hoje. Na demonstração, mostramos o que faz sentido para o seu provedor: monitoramento, mapeamento de rede, análise de dados, integração com IA ou uma solução para uma necessidade específica.</p>
     </div>
     <div class="actions">
-      <a class="btn" href="https://wa.me/5581987942112?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20NetGauge%20e%20quero%20conhecer%20as%20solu%C3%A7%C3%B5es." target="_blank" rel="noopener">Conversar no WhatsApp</a>
+      <a class="btn" href="#diagnostico" data-origem="Contato: Agendar demonstração">Agendar uma demonstração</a>
       <a class="btn ghost" href="mailto:netgauge@netgauge.com.br">netgauge@netgauge.com.br</a>
     </div>
    </div>
@@ -715,8 +726,6 @@ body .spot:hover{border-color:rgba(77,182,242,.55);box-shadow:0 0 0 1px rgba(77,
     <span>© <span id="ano"></span> NetGauge Consulting · Rede e dados para provedores de internet</span>
   </div>
 </footer>
-
-<a class="wa-float" href="https://wa.me/5581987942112?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20NetGauge%20e%20quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o." target="_blank" rel="noopener" aria-label="Conversar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C7 3 3 6.6 3 11c0 2.3 1.1 4.4 2.9 5.9L5 21l4.3-2.2c.9.2 1.8.3 2.7.3 5 0 9-3.6 9-8s-4-8-9-8z"/></svg></a>
 
 <dialog id="zoom" aria-label="Imagem ampliada"><button type="button" aria-label="Fechar">×</button><img alt=""></dialog>
 
@@ -813,6 +822,7 @@ const illus = {
 };
 
 const cases = {
+  ia:{a:'Diretoria, financeiro e comercial', d:'Para responder uma pergunta simples sobre a base, alguém precisa montar um relatório no ERP, e o que foge do padrão só aparece no fechamento do mês.', t:'Assistente de IA para os dados do provedor', r:'O gestor pergunta em português e recebe a resposta com os números na hora, e o resumo da semana e os alertas de anomalia chegam sozinhos no WhatsApp.', p:[['Perguntas em português','Sem montar relatório: a IA consulta os dados do ERP e da rede.'],['Resumos automáticos','O que mudou no período, enviado no WhatsApp ou e-mail.'],['Alertas de anomalia','Picos de cancelamentos, queda de vendas ou aumento de chamados.']]},
   olt:{a:'NOC e engenharia', d:'O uplink da OLT satura e a equipe só descobre quando os clientes começam a reclamar de lentidão.', t:'Monitoramento de tráfego de OLTs Huawei', r:'A ocupação do uplink de cada OLT fica visível, e a expansão de capacidade é planejada com dados, antes de o gargalo chegar ao cliente.', p:[['Status por OLT','Visão imediata de quais OLTs estão online.'],['Entrada e saída','Tráfego de cada OLT ao longo do dia.'],['Ocupação do link','Mínimo, média, pico e % de uso para planejar capacidade.']]},
   core:{a:'NOC', d:'Quando um peer BGP cai, a equipe precisa abrir várias ferramentas para entender o impacto no tráfego.', t:'Núcleo de rede: BGP, links e BNG', r:'Uma sessão BGP que cai aparece na hora, junto com o efeito no tráfego de trânsito, CDN, CGNAT e BNG, tudo na mesma tela.', p:[['Sessões BGP','Status, tempo de sessão e prefixos de cada peer.'],['Tráfego por link','Trânsito, CDN, CGNAT e BNG lado a lado.'],['Saúde do BNG','PPPoE online, CPU, temperatura e uptime.']]},
   gpon:{a:'NOC e equipe de campo', d:'Sinal óptico ruim só aparece quando o cliente liga reclamando, e a visita técnica vira corretiva.', t:'OLT GPON: ONUs e sinal óptico', r:'Clientes com sinal óptico degradado são identificados antes de abrirem chamado, o que permite manutenção preventiva.', p:[['Sinal por cliente','RX de cada ONU, do pior para o melhor.'],['Ocupação das PONs','Quantas ONUs em cada porta PON.'],['Uplink da OLT','Entrada e saída em tempo real.']]},
@@ -829,8 +839,26 @@ const DATAHUB = 'https://datahub-demox.vercel.app/';
 const demos = {mapa:['https://mapa-demo-theta.vercel.app/','login já preenchido'],visao:[DATAHUB+'#visao-geral'],financeiro:[DATAHUB+'#financeiro'],churn:[DATAHUB+'#visao-geral'],redes:[DATAHUB+'#redes'],estoque:[DATAHUB+'#estoque']};
 const shots = {olt:['case-olt',1600,592],core:['case-core',1600,705],gpon:['case-gpon',1600,583],alertas:['case-alertas',530,525],mapa:['case-mapa',2000,1125],churn:['case-churn',2000,1106],financeiro:['case-financeiro',2000,850],visao:['case-visao',2000,1308],redes:['case-redes',2000,1150],estoque:['case-estoque',2000,1189]};
 
+/* produto marcado no formulário quando o cliente clica em "Quero isso no meu provedor" */
+const caseProduto = {ia:'Integração com IA',olt:'Monitoramento de rede',core:'Monitoramento de rede',gpon:'Monitoramento de rede',alertas:'Automações (ex.: alertas no WhatsApp)',mapa:'Mapeamento de redes',visao:'Análise de dados',financeiro:'Análise de dados',churn:'Análise de dados',redes:'Análise de dados',estoque:'Análise de dados'};
+/* ilustração do assistente de IA (dados fictícios) */
+const iaMock = () => `<div class="ia-mock" role="img" aria-label="Ilustração: perguntas ao assistente de IA, resumo da semana e alerta de anomalia no WhatsApp">
+  <div class="ia-col">
+    <div class="ia-title">Assistente NetGauge</div>
+    <div class="msg me">Quantos cancelamentos tivemos em outubro e onde se concentraram?</div>
+    <div class="msg ai">Foram <b>87 cancelamentos</b>, 12% a mais que em setembro. <b>41%</b> vieram de três bairros: Bairro A (18), Bairro B (11) e Bairro C (7). O motivo mais citado foi <b>instabilidade na conexão</b>.</div>
+    <div class="msg me">E a inadimplência acima de 45 dias?</div>
+    <div class="msg ai"><b>R$ 23,4 mil</b> em aberto, em 132 clientes. 60% deles estão no plano de 300 Mega.</div>
+  </div>
+  <div class="ia-col">
+    <div class="ia-title">WhatsApp · todo dia 8h</div>
+    <div class="msg wa"><b>Resumo da semana</b><br>Ativações: 64 (+8%)<br>Cancelamentos: 19 (−5%)<br>Chamados técnicos: 212<br>Recebido: R$ 186 mil</div>
+    <div class="msg wa alert"><b>Anomalia detectada</b><br>Cancelamentos no Bairro A estão 3x acima da média dos últimos 7 dias.</div>
+  </div>
+</div>`;
+
 const panel = document.getElementById('casepanel');
-const waLink = msg => 'https://wa.me/5581987942112?text='+encodeURIComponent(msg);
+const waLink = msg => 'https://wa.me/5581991179941?text='+encodeURIComponent(msg);
 const tabs = [...document.querySelectorAll('.tab')];
 
 /* sem print em /img: mostra a ilustração e tira a dica de zoom */
@@ -845,13 +873,13 @@ function fallback(img, key){
 function show(key, focus){
   tabs.forEach(t=>{const on=t.dataset.case===key;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;if(on&&focus)t.focus();});
   const c = cases[key];
-  const [file,w,h] = shots[key];
+  const [file,w,h] = shots[key] || [];
   panel.innerHTML = `<span class="for">Para ${c.a}</span><h3>${c.t}</h3>
     <div class="ba"><div><b>O problema</b>${c.d}</div><div><b>O que muda</b>${c.r}</div></div>
-    <div class="shot"><img class="zoomable" tabindex="0" src="img/${file}.webp" width="${w}" height="${h}" alt="Exemplo: ${c.t}" onerror="fallback(this,'${key}')"></div>
-    <div class="shot-foot"><p class="hint">Clique na imagem para ampliar.</p>${demos[key] ? `<a class="demo-link" href="${demos[key][0]}" target="_blank" rel="noopener">Abrir demonstração ao vivo ↗${demos[key][1] ? ` <small>· ${demos[key][1]}</small>` : ''}</a>` : ''}</div>
+    <div class="shot">${key==='ia' ? iaMock() : `<img class="zoomable" tabindex="0" src="img/${file}.webp" width="${w}" height="${h}" alt="Exemplo: ${c.t}" onerror="fallback(this,'${key}')">`}</div>
+    <div class="shot-foot"><p class="hint">${key==='ia' ? 'Exemplo ilustrativo, com dados fictícios.' : 'Clique na imagem para ampliar.'}</p>${demos[key] ? `<a class="demo-link" href="${demos[key][0]}" target="_blank" rel="noopener">Abrir demonstração ao vivo ↗${demos[key][1] ? ` <small>· ${demos[key][1]}</small>` : ''}</a>` : ''}</div>
     <div class="points">${c.p.map(x=>`<div><b>${x[0]}</b><p>${x[1]}</p></div>`).join('')}</div>
-    <div class="case-cta"><p><strong>Quer isso com os dados do seu provedor?</strong>Mostramos na demonstração e, com o acesso liberado, entregamos um primeiro painel em 3 dias.</p><a class="btn" href="${waLink('Olá, vim pelo site da NetGauge e quero ver o exemplo "'+c.t+'" funcionando no meu provedor.')}" target="_blank" rel="noopener">Quero isso no meu provedor</a></div>`;
+    <div class="case-cta"><p><strong>Quer isso com os dados do seu provedor?</strong>Mostramos na demonstração e, com o acesso liberado, entregamos um primeiro painel em 3 dias.</p><a class="btn" href="#diagnostico" data-interesse="${caseProduto[key]}" data-origem="Exemplo: ${c.t}">Quero isso no meu provedor</a></div>`;
 }
 tabs.forEach((t,i)=>{
   t.addEventListener('click',()=>show(t.dataset.case));
@@ -862,7 +890,7 @@ tabs.forEach((t,i)=>{
     if(j!==null){e.preventDefault();show(tabs[j].dataset.case,true);}
   });
 });
-show('olt');
+show('ia');
 
 const zoom = document.getElementById('zoom');
 const zoomImg = zoom.querySelector('img');
@@ -890,11 +918,19 @@ const PLANILHA_URL = 'https://script.google.com/macros/s/AKfycbyv8HNRw7AkVLROim0
   const err = document.getElementById('diag-err');
 
   /* abrir e fechar o modal */
+  let origemBotao = '';
   const abrir = () => { if(modal.open) return; modal.showModal ? modal.showModal() : modal.setAttribute('open',''); };
   const fechar = () => { modal.close ? modal.close() : modal.removeAttribute('open'); };
   document.addEventListener('click', e=>{
     const a = e.target.closest('a[href="#diagnostico"]');
-    if(a){ e.preventDefault(); abrir(); }
+    if(!a) return;
+    e.preventDefault();
+    if(a.dataset.origem) origemBotao = a.dataset.origem;
+    if(a.dataset.interesse){
+      const box = [...form.querySelectorAll('input[name="interesse"]')].find(i=>i.value===a.dataset.interesse);
+      if(box){ box.checked = true; box.closest('fieldset').classList.remove('bad'); }
+    }
+    abrir();
   });
   modal.querySelector('.diag-close').addEventListener('click', fechar);
   modal.addEventListener('click', e=>{ if(e.target===modal) fechar(); }); /* clique fora do conteúdo */
@@ -905,6 +941,7 @@ const PLANILHA_URL = 'https://script.google.com/macros/s/AKfycbyv8HNRw7AkVLROim0
   let ref = '';
   try{ if(document.referrer && new URL(document.referrer).host!==location.host) ref = new URL(document.referrer).host; }catch(e){}
   const acesso = utm || ref;
+  const acessoVia = () => [acesso, origemBotao && 'botão: '+origemBotao].filter(Boolean).join(' · ');
 
   const pick = name => [...form.querySelectorAll(`[name="${name}"]:checked`)].map(i=>i.value);
   const val = name => form.elements[name].value.trim();
@@ -920,7 +957,7 @@ const PLANILHA_URL = 'https://script.google.com/macros/s/AKfycbyv8HNRw7AkVLROim0
     nome: val('nome'), whatsapp: val('whatsapp'), provedor: val('provedor'), cidade: val('cidade'),
     interesse: pick('interesse').join(', '), problemas: pick('dor').join(', '),
     erp: pick('erp').join(', '), monitoramento: pick('monit').join(', '),
-    observacoes: val('obs'), acesso_via: acesso, pagina: location.href.split('#')[0]
+    observacoes: val('obs'), acesso_via: acessoVia(), pagina: location.href.split('#')[0]
   });
   function gravar(){
     if(!PLANILHA_URL || !foneOk()) return;   /* sem WhatsApp válido não há como retornar o contato */
@@ -986,7 +1023,7 @@ const PLANILHA_URL = 'https://script.google.com/macros/s/AKfycbyv8HNRw7AkVLROim0
     add('ERP', pick('erp'));
     add('Monitoramento', pick('monit'));
     add('Observações', val('obs'));
-    add('Acesso via', acesso);
+    add('Acesso via', acessoVia());
 
     const url = waLink(linhas.join('\n'));
     const win = window.open(url, '_blank');
